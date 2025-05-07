@@ -159,7 +159,7 @@ class AdjacencyListDirectedGraph:
     #'["Mumbai", "Dubai", "New York"]' but this Instance Method will only return the first path found, 
     #'["Mumbai", "Paris", "New York"]', so this is a flaw as it would be better to return both shortest paths.
 
-    # def egt_shortest_path(self, all_paths):
+    # def get_shortest_path(self, all_paths):
     #     d = {}
     #     for i in all_paths:
     #         if len(i) in d:
