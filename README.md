@@ -201,7 +201,7 @@ https://www.youtube.com/watch?v=JnrbMQyGLiU&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYop
 
 ### Tutorial 9.2 - Heaps (Binary Tree Data Structure variation) <a name = "tutorial9.2"></a>
 *What is a Heap?*  
-A Heap is a further variation of the Binary Tree Data Structure. The difference/modification between a Binary Tree and Heap is that a normal Binary Tree is unordered, while a Heap is partially ordered (by some manner)according to the Heap Property. 
+A Heap is a further variation of the Binary Tree Data Structure. The difference/modification between a Binary Tree and Heap is that a normal Binary Tree is unordered, while a Heap is partially ordered (by some manner) according to the Heap Property. 
 
 Similar to Binary Tree, Heap can handle duplicates (unlike Binary Search Trees, which cannot handle duplicates). Usually, the Heap Data Structure is implemented as one of its further variations, more commonly in the form of a Max-Heap or Min-Heap, depending of the type of Heap Property used. 
 
