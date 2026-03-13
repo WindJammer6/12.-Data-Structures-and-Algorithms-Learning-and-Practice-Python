@@ -201,20 +201,11 @@ https://www.youtube.com/watch?v=JnrbMQyGLiU&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYop
 
 ### Tutorial 9.2 - Heaps (Binary Tree Data Structure variation) <a name = "tutorial9.2"></a>
 *What is a Heap?*  
-A Heap is a further variation of the Binary Tree Data Structure, 
+A Heap is a further variation of the Binary Tree Data Structure. The difference/modification between a Binary Tree and Heap is that a normal Binary Tree is unordered, while a Heap is partially ordered (by some manner)according to the Heap Property. 
 
- a non-linear Data Structure with maximum of two children nodes for each node. The difference/modification between a General Tree and a Binary Tree is that each node in a General Tree can have zero to infinity number of children, while each node in a Binary Tree can only have a (zero to) maximum of 2 nodes left and right. 
+Similar to Binary Tree, Heap can handle duplicates (unlike Binary Search Trees, which cannot handle duplicates). Usually, the Heap Data Structure is implemented as one of its further variations, more commonly in the form of a Max-Heap or Min-Heap, depending of the type of Heap Property used. 
 
-Similar to a General Tree, a Binary Tree does not have its Nodes sorted. Usually, by itself, the Binary Tree is not very applicable/useful as its Nodes are unsorted, hence, it is usually implemented as one of its further variations, more commonly in the form of a Binary Search Tree (BST) (aka ordered/sorted Binary Tree).
-
-*What is a Binary Search Tree (BST)?*  
-A Binary Search Tree (BST) is a further variation of the Binary Tree Data Structure, sometimes known as an ordered/sorted Binary Tree. The 2 differences/modifications between a Binary Tree and Binary Search Tree is that a normal Binary Tree is unordered, and allows duplicates, while a Binary Search Tree is ordered (by some manner) that allows easy searching of a particular node, and dosen't allow duplicates (its not like BST don't allow, but we tell our BST to not allow it as duplicate data nodes sort of messes up the BST's ordering/sorting and subsequently the search function. We will be able to understand this once we learn how the BST's ordering/sorting works)
-
-By the way, Binary Search Tree are called as such as due to their ordered/sorted characteristic, it increases the efficiency (Big O Notation) of searching (search operation) in a Binary Tree.
-
-Source(s):  
-https://www.youtube.com/watch?v=lFq5mYUWEBk&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=10 (Part 1) (codebasics)  
-https://www.youtube.com/watch?v=JnrbMQyGLiU&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=11 (Part 2) (codebasics)
+Source(s):   https://data-driven-world.github.io/2023/notes/heap-complexity/binary-heap (SUTD notes) 
 
 <br>
 
