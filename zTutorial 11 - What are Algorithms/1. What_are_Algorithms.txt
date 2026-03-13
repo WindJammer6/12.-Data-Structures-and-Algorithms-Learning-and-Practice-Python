@@ -31,7 +31,7 @@ Examples of Sorting Algorithms:
   -> Shell Sort (improved Insertion Sort variation)
 - Merge Sort
 - Selection Sort
-  -> Heap Sort (improved Selection Sort variation)(not covered in this tutorial)
+  -> Heap Sort (improved Selection Sort variation)
 
 
 ////////////////////////////////////////////
