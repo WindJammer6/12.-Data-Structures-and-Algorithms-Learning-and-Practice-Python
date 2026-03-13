@@ -36,6 +36,7 @@ Learning and Practices are both organised under each folder for their respective
     + [Tutorial 8 - Queues (Data Structure)](#tutorial8)  
     + [Tutorial 9 - Trees and General Trees (Data Structure)](#tutorial9)  
       + [Tutorial 9.1 - Binary Trees (Tree Data Structure variation) and Binary Search Trees (Binary Tree Data Structure variation)](#tutorial9.1)  
+      + [Tutorial 9.2 - 
     + [Tutorial 10 - Graphs (Data Structure)](#tutorial10)  
 
   + [On Algorithms (Searching and Sorting Algorithms)](#algorithms):
