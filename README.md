@@ -36,7 +36,7 @@ Learning and Practices are both organised under each folder for their respective
     + [Tutorial 8 - Queues (Data Structure)](#tutorial8)  
     + [Tutorial 9 - Trees and General Trees (Data Structure)](#tutorial9)  
       + [Tutorial 9.1 - Binary Trees (Tree Data Structure variation) and Binary Search Trees (Binary Tree Data Structure variation)](#tutorial9.1)  
-      + [Tutorial 9.2 - Heaps (Data Structure)](#tutorial9.2)
+      + [Tutorial 9.2 - Heaps (Binary Tree Data Structure variation) and Max Heaps (Heap Data Structure variation) and Min Heaps (Heap Data Structure variation)](#tutorial9.2)
     + [Tutorial 10 - Graphs (Data Structure)](#tutorial10)  
 
   + [On Algorithms (Searching and Sorting Algorithms)](#algorithms):
@@ -199,11 +199,19 @@ https://www.youtube.com/watch?v=JnrbMQyGLiU&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYop
 
 <br>
 
-### Tutorial 9.2 - Heaps (Binary Tree Data Structure variation) <a name = "tutorial9.2"></a>
+### Tutorial 9.2 - Heaps (Binary Tree Data Structure variation) and Max Heaps (Heap Data Structure variation) and Min Heaps (Heap Data Structure variation) <a name = "tutorial9.2"></a>
 *What is a Heap?*  
 A Heap is a further variation of the Binary Tree Data Structure. The difference/modification between a Binary Tree and Heap is that a normal Binary Tree is unordered, while a Heap is partially ordered (by some manner) according to the Heap Property. 
 
 Similar to Binary Tree, Heap can handle duplicates (unlike Binary Search Trees, which cannot handle duplicates). Usually, the Heap Data Structure is implemented as one of its further variations, more commonly in the form of a Max-Heap or Min-Heap, depending of the type of Heap Property used. 
+
+*What is a Max Heap?*  
+A Max-Heap is a further variation of the Heap Data Structure, which is essentially a Heap Data Structure being
+partially ordered according to the Max-Heap Property. 
+
+*What is a Min Heap?*  
+A Min-Heap is a further variation of the Heap Data Structure, which is essentially a Heap Data Structure being
+partially ordered according to the Min-Heap Property.
 
 Source(s):   https://data-driven-world.github.io/2023/notes/heap-complexity/binary-heap (SUTD notes) 
 
