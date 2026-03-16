@@ -1,0 +1,624 @@
+Quick note, since the Heap Sort sorting algorithm is not discussed by the codebasics' Youtube playlist, I sourced
+its concepts from my school (SUTD) notes.
+
+Source: https://data-driven-world.github.io/2023/notes/heap-complexity/binary-heap (SUTD notes)
+   
+
+///////////////////////////////////////
+
+
+Selection Sort is a sorting algorithm that sorts a list by repeatedly selecting the smallest (or largest) 
+element from the unsorted subarray of the initial unsorted List and moving it to the sorted subarray of the 
+initial unsorted List. 
+
+
+What is Heap Sort?
+
+Heap Sort is mainly an optimised variation of Selection Sort. 
+
+Selection Sort repeatedly finds the smallest element from the unsorted part of the list and places it into 
+its correct sorted position. The problem is that finding that smallest element each time requires scanning 
+the unsorted part linearly, which takes O(n) time for each pass. Heap Sort improves this by using the 
+Heap Data Structure to find and remove the largest or smallest element more efficiently, in O(log n).
+
+
+//////////////////////////////////////////////
+
+
+Is the Heap Sort Algorithm implemented iteratively or recursively?
+
+- The overall Heap Sort Algorithm is more commonly implemented iteratively
+- The 'max_heapify()' function or 'max_heapify()' function is more commonly implemented recursively
+  (implementing it iteratively is possible too but recursive implementation is easier to understand 
+  and less complicated to implement)
+
+In this tutorial we will be learning how to implement the overall Heap Sort Algorithm iteratively,
+and the 'max_heapify()' function or 'max_heapify()' function recursively.
+
+
+//////////////////////////////////////////////
+
+
+To better understand the Heap Sort algorithm, let's first examine the problem with the Selection Sort 
+algorithm that Heap Sort tries to solve
+
+So what is the problem of Selection Sort Algorithm that Heap Sort Algorithm solves?
+
+
+(You can refer to the steps of Selection Sort Algorithm in '1. What_is_Selection_Sort.txt' (Steps 1 to 5) and 
+'2. Selection_sort_(function).py' (Steps 2, 3 and 4) in the 'Tutorial 17 - Selection Sort (Sorting 
+Algorithm)' tutorial)
+
+
+In short, lets say we are currently at this stage of the Selection Sort Algorithm on a unsorted List.
+(The problem lies in step 2 of the Insertion Sort Algorithm, see step 2 of the Selection Sort Algorithm
+in more detail in '1. What_is_Selection_Sort.txt' and '2. selection_sort_(function).py' in the 
+'Tutorial 17 - Selection Sort (Sorting Algorithm)' tutorial)
+
+Visualisation of the problem of Selection Sort Algorithm that Heap Sort Algorithm solves:
+(Starting iteration, for the first element's iteration)
+2. Next, within the unsorted subarray of the initial unsorted List, we will find and identify the smallest element 
+   ('4') (lets assume we have an algorithm that will allows us to find the minimum element in a List, which is quite 
+   simple to implement actually which we will look at in the '2. selection_sort_(function).py' file)
+                  us                              (Let 'min' be the smallest element identified by the
+      <------------------------->                            seperate algorithm that finds the minimum 
+      [21][38][29][17][4][25][11]                            element in a List)
+        ^              ^
+    (pointer)        (min)
+
+3. Since the minimum element identified by the seperate algorithm does not happen to be the element that the pointer
+   'pointer' is pointing at, we will do a swap in the positions of the element that the pointer 'pointer' is pointing at 
+   ('21'), and the minimum element identified by the seperate algorithm that finds the minimum element in a List ('4').
+
+   Before the swap:
+                  us
+      <------------------------->
+      [21][38][29][17][4][25][11]
+        ^              ^
+    (pointer)        (min)
+
+   After the swap:
+                  us
+      <------------------------->
+      [4][38][29][17][21][25][11]
+       ^               ^
+   (pointer)         (min)
+
+4. Now we will move the pointer down the unsorted List, from pointing at the first element ('4') to pointing at 
+   the second element ('38'). 
+       ss           us
+      <-><---------------------->
+      [4][38][29][17][21][25][11]
+           ^               
+       (pointer)         
+
+
+From this stage of the Selection Sort Algorithm on a unsorted List, we can see that every time in order to find 
+and identify the smallest element in a List, we are using a linear algorithm with a Big O Notation of Time 
+Complexity of O(n), which makes the Selection Sort Algorithm inefficient in terms of time complexity.
+
+So Heap Sort Algorithm tries to solve this problem. How it does this? Heap Sort makes use of the Heap Data 
+Structure (see more in the 'Tutorial 9.2 - Heaps (Binary Tree Data Structure variation) and Max Heaps (Heap 
+Data Structure variation) and Min Heaps (Heap Data Structure variation)' folder) to find the smallest 
+element in a List more efficiently, with a Big O Notation of Time Complexity of O(logn) instead.
+
+Lets take a look at how Heap Sort works.
+
+
+//////////////////////////////////////////////
+
+
+How does Heap Sort Algorithm work?
+
+Here are the steps of Heap Sort Algorithm:
+Using Max Heap Data Structure:
+1. Build a Max Heap Data Structure from the unsorted list with Max Heapify operation
+2. Since the largest element is always at the root, swap the largest element/root with the last element 
+   in the Max Heap Data Structure, and remove the largest element (now the last element)
+3. Reduce the size of the Max Heap Data Structure by 1 (since we removed the largest element (now the 
+   last element))
+4. Max Heapify operation the root again, since it is the only node that does not obey the Max Heap
+   property to restore the Max Heap property 
+
+Repeat steps 1 to 4 until the size of the Max Heap Data Structure becomes 1, when the array will 
+then be sorted in ascending order
+
+
+Visualisation of how Heap Sort Algorithm works with Max-Heap Data Structure:
+Let the initial unsorted List be:
+   [21][38][29][17][4][25][32][9]
+
+(First iteration)
+1. Build a Max Heap Data Structure from the initial unsorted List with Max Heapify operation. 
+   Current array and its representive complete Binary Tree Data Structure and array:
+                [38]
+               /    \
+            [21]    [32]                      us
+            /  \    /  \         <---------------------------->      (Let 'us' be unsorted section and 'ss' be sorted section)
+         [17] [4] [25] [29]      [38][21][32][17][4][25][29][9]
+         /                         ^                         ^
+       [9]                       (max)                   (pointer)
+
+2. Swap the root with the last element in the unsorted section
+   Before swap:
+                [38]
+               /    \
+            [21]    [32]                      us
+            /  \    /  \         <---------------------------->
+         [17] [4] [25] [29]      [38][21][32][17][4][25][29][9]
+         /                         ^                         ^
+       [9]                       (max)                   (pointer)
+
+   After swap:
+                [9]
+               /   \
+            [21]    [32]                      us
+            /  \    /  \         <---------------------------->
+         [17] [4] [25] [29]      [9][21][32][17][4][25][29][38]
+         /                        ^                         ^
+       [38]                     (max)                   (pointer)
+
+   Now the array is split into:
+                [9]
+               /   \
+            [21]    [32]                      us            ss
+            /  \    /  \         <------------------------><-->
+         [17] [4] [25] [29]      [9][21][32][17][4][25][29][38]
+         /                        ^                         ^
+       [38]                     (max)                   (pointer)
+                                     
+   The root 38, which is the largest element, has now been moved to the end of the unsorted section, so 
+   38 is now in its correct final sorted position. The sorted section now contains one element
+
+3. Reduce the size of the unsorted section by 1. We now ignore the last element because it is already sorted.
+   Current array and its representive complete Binary Tree Data Structure and array:
+                [9]
+               /   \
+            [21]    [32]                      us            ss
+            /  \    /  \         <------------------------><-->
+         [17] [4] [25] [29]      [9][21][32][17][4][25][29][38]
+                                  ^                         ^
+                                (max)                   (pointer)
+
+4. Max Heapify the root to restore the Max Heap property as the max heap property is now broken because 9 
+   is at the root, and 9 is smaller than both 21 and 32.
+   Current array and its representive complete Binary Tree Data Structure and array:
+                [9]
+               /   \
+            [21]    [32]                      us            ss
+            /  \    /  \         <------------------------><-->
+         [17] [4] [25] [29]      [9][21][32][17][4][25][29][38]
+                                  ^                         ^
+                                (max)                   (pointer)
+
+   Since 32 is the largest among 9, 21, and 32, swap 9 with 32:
+                [32]
+               /   \
+            [21]     [9]                      us            ss
+            /  \    /  \         <------------------------><-->
+         [17] [4] [25] [29]      [32][21][9][17][4][25][29][38]
+                                  ^                         ^
+                                (max)                   (pointer)
+
+   Now continue heapifying down from 9. Compare 9 with its children 25 and 29. The largest is 29, 
+   so swap again:
+                [32]
+               /   \
+            [21]    [29]                     us            ss
+            /  \    /  \         <------------------------><-->
+         [17] [4] [25] [9]       [32][21][9][17][4][25][29][38]
+                                  ^                         ^
+                                (max)                   (pointer)
+
+   Now the Max Heap property is restored.
+
+(Second iteration)
+1. Again, the largest element in the unsorted section is at the root.
+   Current array and its representive complete Binary Tree Data Structure and array:
+                [32]
+               /   \
+            [21]    [29]                     us             ss
+            /  \    /  \         <------------------------><-->
+         [17] [4] [25] [9]       [32][21][29][17][4][25][9][38]
+                                  ^                         ^
+                                (max)                   (pointer)
+
+2. Swap the root with the last element in the unsorted section
+   Before swap:
+                [32]
+               /   \
+            [21]    [29]                     us             ss
+            /  \    /  \         <------------------------><-->
+         [17] [4] [25] [9]       [32][21][29][17][4][25][9][38]
+                                  ^                         ^
+                                (max)                   (pointer)
+
+   After swap:
+                [9]
+               /   \
+            [21]    [29]                     us             ss
+            /  \    /  \         <------------------------><-->
+         [17] [4] [25] [32]      [9][21][29][17][4][25][32][38]
+                                  ^                         ^
+                                (max)                   (pointer)
+
+   Now the array is split into:
+                [9]
+               /   \
+            [21]    [29]                   us             ss
+            /  \    /  \         <--------------------><------>
+         [17] [4] [25] [32]      [9][21][29][17][4][25][32][38]
+                                  ^                      ^
+                                (max)                (pointer)
+                                     
+   The root 32, which is the largest element, has now been moved to the end of the unsorted section, so,
+   32 is now in its correct final sorted position. The sorted section now contains two elements.
+
+3. Reduce the size of the unsorted section by 1. We now ignore the second last element because it 
+   is already sorted.
+   Current array and its representive complete Binary Tree Data Structure and array:
+                [9]
+               /   \
+            [21]    [29]                   us             ss
+            /  \    /            <--------------------><------>
+         [17] [4] [25]           [9][21][29][17][4][25][32][38]
+                                  ^                      ^
+                                (max)                (pointer)
+
+4. Max Heapify the root to restore the Max Heap property as the max heap property is now broken because 9 
+   is at the root, and 9 is smaller than both 21 and 32.
+   Current array and its representive complete Binary Tree Data Structure and array:
+                [9]
+               /   \
+            [21]    [29]                   us             ss
+            /  \    /            <--------------------><------>
+         [17] [4] [25]           [9][21][29][17][4][25][32][38]
+                                  ^                      ^
+                                (max)                (pointer)
+
+   Since 29 is the largest among 9, 21, and 29, swap 9 with 29:
+                [29]
+               /   \
+            [21]    [9]                    us             ss
+            /  \    /            <--------------------><------>
+         [17] [4] [25]           [29][21][9][17][4][25][32][38]
+                                  ^                      ^
+                                (max)                (pointer)
+
+   Now continue heapifying down from 9. Compare 9 with its children 25. The largest is 25, 
+   so swap again:
+                [29]
+               /   \
+            [21]    [25]                   us             ss
+            /  \    /            <--------------------><------>
+         [17] [4] [9]            [29][21][25][17][4][9][32][38]
+                                  ^                      ^
+                                (max)                (pointer)
+
+   Now the Max Heap property is restored.
+
+
+Repeat until the unsorted section has size 1. Eventually, the array becomes:
+       us            ss
+      <-><------------------------->
+      [4][9][17][21][25][29][32][38]
+
+which is sorted in ascending order.
+
+
+//////////////////////////////////////////
+
+
+Using Min Heap Data Structure:
+1. Build a Min Heap Data Structure from the unsorted list with Min Heapify operation
+2. Since the smallest element is always at the root, swap the smallest element/root with the last element 
+   in the Min Heap Data Structure, and remove the smallest element (now the last element)/place the smallest
+   element (now the last element) in the sorted section
+3. Reduce the size of the Min Heap Data Structure by 1 (since we removed/place the smallest element (now the 
+   last element) in the sorted section)
+4. Min Heapify operation the root again, since it is the only node that does not obey the Min Heap
+   property to restore the Min Heap property 
+
+Repeat steps 1 to 4 until the size of the Min Heap Data Structure becomes 1, when the array will 
+then be sorted in descending order
+
+
+Visualisation of how Heap Sort Algorithm works with Min-Heap Data Structure:
+Let the initial unsorted List be:
+   [21][38][29][17][4][25][32][9]
+
+(First iteration)
+1. Build a Min Heap Data Structure from the initial unsorted List with Min Heapify operation.
+   Current array and its representative complete Binary Tree Data Structure and array:
+                [4]
+               /   \
+            [9]     [25]                      us
+            / \     /  \         <---------------------------->      (Let 'us' be unsorted section and 'ss' be sorted section)
+         [17][21] [29][32]       [4][9][25][17][21][29][32][38]
+         /                        ^                         ^
+       [38]                     (min)                   (pointer)
+
+2. Swap the root with the last element in the unsorted section
+   Before swap:
+                [4]
+               /   \
+            [9]     [25]                      us
+            / \     /  \          <---------------------------->
+         [17][21] [29][32]        [4][9][25][17][21][29][32][38]
+         /                         ^                         ^
+       [38]                      (min)                   (pointer)
+
+   After swap:
+                [38]
+               /    \
+            [9]      [25]                     us
+            / \      /  \         <---------------------------->
+         [17][21]  [29][32]       [38][9][25][17][21][29][32][4]
+         /                          ^                         ^
+       [4]                        (min)                   (pointer)
+
+   Now the array is split into:
+                [38]
+               /    \
+            [9]      [25]                     us              ss 
+            / \      /  \         <-------------------------><->
+         [17][21]  [29][32]       [38][9][25][17][21][29][32][4]
+         /                          ^                         ^
+       [4]                        (min)                   (pointer)
+
+   The root 4, which is the smallest element, has now been moved to the end of the 
+   unsorted section, so 4 is now in its correct final sorted position for descending 
+   order. The sorted section now contains one element.
+
+3. Reduce the size of the unsorted section by 1. We now ignore the last element because it is already sorted.
+   Current array and its representative complete Binary Tree Data Structure and array:
+                [38]
+               /    \
+            [9]      [25]                   us                ss
+            / \      /  \         <-------------------------><->
+         [17][21]  [29][32]       [38][9][25][17][21][29][32][4]
+                                   ^                          ^
+                                 (min)                    (pointer)
+
+4. Min Heapify the root to restore the Min Heap property as the min heap property is now broken 
+   because 38 is at the root, and 38 is greater than both 9 and 25.
+   Current array and its representative complete Binary Tree Data Structure and array:
+                [38]
+               /    \
+            [9]      [25]                   us                ss
+            / \      /  \         <-------------------------><->
+         [17][21]  [29][32]       [38][9][25][17][21][29][32][4]
+                                   ^                          ^
+                                 (min)                    (pointer)
+
+   Since 9 is the smallest among 38, 9, and 25, swap 38 with 9:
+                [9]
+               /   \
+            [38]    [25]                    us                ss
+            / \      /  \         <-------------------------><->
+         [17][21]  [29][32]       [9][38][25][17][21][29][32][4]
+                                   ^                          ^
+                                 (min)                    (pointer)
+
+   Now continue heapifying down from 38. Compare 38 with its children 17 and 21. The 
+   smallest is 17, so swap again:
+                [9]
+               /   \
+            [17]    [25]                    us                ss
+            / \      /  \         <-------------------------><->
+         [38][21]  [29][32]       [9][17][25][38][21][29][32][4]
+                                   ^                          ^
+                                 (min)                    (pointer)
+
+   Now continue heapifying down from 38. It has no valid children inside the reduced unsorted 
+   section, so stop.
+
+   Now the Min Heap property is restored.
+
+(Second iteration)
+1. Again, the smallest element in the unsorted section is at the root.
+   Current array and its representative complete Binary Tree Data Structure and array:
+                [9]
+               /   \
+            [17]    [25]                    us               ss
+            / \      /  \         <-------------------------><->
+         [38][21]  [29][32]       [9][17][25][38][21][29][32][4]
+                                   ^                          ^
+                                 (min)                    (pointer)
+
+2. Swap the root with the last element in the unsorted section
+   Before swap:
+                [9]
+               /   \
+            [17]    [25]                    us                ss
+            / \      /  \         <-------------------------><->
+         [38][21]  [29][32]       [9][17][25][38][21][29][32][4]
+                                   ^                          ^
+                                 (min)                    (pointer)
+
+   After swap:
+                [32]
+               /    \
+            [17]     [25]                   us                ss
+            / \      /  \         <-------------------------><->
+         [38][21]  [29][9]        [32][17][25][38][21][29][9][4]
+                                   ^                          ^
+                                 (min)                    (pointer)
+
+   Now the array is split into:
+                [32]
+               /    \
+            [17]     [25]                 us                ss
+            / \      /  \         <----------------------><---->
+         [38][21]  [29][9]        [32][17][25][38][21][29][9][4]
+                                   ^                       ^
+                                 (min)                 (pointer)
+
+   The root 9, which is the smallest element, has now been moved to the end of the unsorted section, so 
+   9 is now in its correct final sorted position for descending order. The sorted section now contains 
+   two elements.
+
+3. Reduce the size of the unsorted section by 1. We now ignore the second last element because it is 
+   already sorted.
+   Current array and its representative complete Binary Tree Data Structure and array:
+                [32]
+               /    \
+            [17]     [25]                 us                ss
+            / \      /            <----------------------><---->
+         [38][21]  [29]           [32][17][25][38][21][29][9][4]
+                                    ^                      ^
+                                  (min)                (pointer)
+
+4. Min Heapify the root to restore the Min Heap property as the min heap property is now broken because 
+   32 is at the root, and 32 is greater than both 17 and 25.
+   Current array and its representative complete Binary Tree Data Structure and array:
+                [32]
+               /    \
+            [17]     [25]                 us                ss
+            / \      /            <----------------------><---->
+         [38][21]  [29]           [32][17][25][38][21][29][9][4]
+                                    ^                      ^
+                                  (min)                (pointer)
+
+   Since 17 is the smallest among 32, 17, and 25, swap 32 with 17:
+                [17]
+               /    \
+            [32]     [25]                 us                ss
+            / \      /            <----------------------><---->
+         [38][21]  [29]           [17][32][25][38][21][29][9][4]
+                                    ^                      ^
+                                  (min)                (pointer)
+
+   Now continue heapifying down from 32. Compare 32 with its children 38 and 21. The smallest is 21, 
+   so swap again:
+                [17]
+               /    \
+            [21]     [25]                 us             ss
+            / \      /            <----------------------><---->
+         [38][32]  [29]           [17][21][25][38][32][29][9][4]
+                                    ^                      ^
+                                  (min)                (pointer)
+
+   Now the Min Heap property is restored.
+
+Repeat until the unsorted section has size 1. Eventually, the array becomes:
+       us            ss
+      <-><------------------------->
+      [38][32][29][25][21][17][9][4]
+
+which is sorted in descending order.
+
+
+//////////////////////////////////////////
+
+
+Explaining the Big O Notation of Time and Space Complexity of Heap Sort:
+
+For Big O Notation of Time Complexity of Heap Sort:
+Recall the steps of Heap Sort Algorithm from the 'Here are the steps of Heap Sort Algorithm' section,
+1. Heap-building stage (aka step 1)
+   Build a Heap Data Structure from the initial unsorted List.
+   - If we are using a Max Heap Data Structure for ascending order, we will rearrange the elements such that 
+   every parent node is greater than or equal to its children
+   - If we are using a Min Heap Data Structure for descending order, we will rearrange the elements such that 
+   every parent node is smaller than or equal to its children
+
+   This heap-building stage takes O(n) time. Even though heapify by itself takes O(logn) time, when building 
+   the heap bottom-up from all non-leaf nodes, the total time is actually O(n), not O(nlogn).
+
+2. Repeated extraction + heapify stage (aka steps 2 to 4)
+   Now we repeatedly do the following:
+   - take the root element, which is the maximum element in a Max Heap Data Structure or the minimum element 
+     in a Min Heap Data Structure
+   - swap it with the last element in the unsorted section
+   - reduce the size of the unsorted section / heap by 1
+   - restore the heap property by heapifying the root again
+
+   We repeat this until the heap size becomes 1.
+
+   Since we do this roughly n times, and each heapify operation takes O(logn) time in the worst case, this stage 
+   takes:
+   O(n) × O(logn) = O(n logn)
+
+   This is because during each heapify operation, the element at the root may have to travel down the Heap Data 
+   Structure from the root to a leaf node, and the height of a Heap Data Structure is logn.
+
+
+For Big O Notation of Space Complexity of Heap Sort:
+Heap Sort Algorithm is usually considered an in-place sorting algorithm. This is because:
+- the Heap Data Structure is stored inside the same array as the input list
+- no extra temporary array of size n is needed
+
+So the extra memory required apart from the original array is very small and is the Big O Notation of Space 
+Complexity of Heap Sort is hence O(1).
+
+
+//////////////////////////////////////////
+
+
+Comparing Big O Notation of Time Complexity of Selection Sort and Heap Sort:
+
+For reference,
+   Big O Notation of Time and Space Complexity for Selection Sort Algorithm and Heap Sort Algorithm:
+        Sorting Algorithms   |   Space Complexity   |   Time Complexity
+          Selection Sort     |        O(1)	  	    |       O(n^2)
+            Heap Sort        |        O(1)	  	    |     O(n log n)
+
+Heap Sort has a better Big O Notation of Time Complexity of O(n log n) compared to Selection Sort, 
+with a Big O Notation of Time Complexity of O(n^2).
+
+
+//////////////////////////////////////////
+
+
+Advantages and Disadvantages of Heap Sort Algorithm compared to other sorting algorithms:
+
+Advantages of Heap Sort:
+1. Efficiency: Heap Sort has a time complexity of O(n log n) for both average and worst-case scenarios, 
+   making it efficient for sorting large datasets. Its use of the heap data structure ensures that each 
+   insertion and extraction operation is performed in logarithmic time.
+2. In-Place Sorting: Heap Sort is an in-place sorting algorithm, meaning it sorts the data within the 
+   original array without requiring additional memory beyond a constant amount. This can be advantageous 
+   when working with large datasets where minimizing memory usage is crucial.
+3. No Worst-Case Performance Variability: Unlike Quick Sort, Heap Sort's performance does not degrade 
+   significantly in worst-case scenarios. Its time complexity remains O(n log n) regardless of the input 
+   data's characteristics.
+4. Predictable Performance: Heap Sort provides predictable performance, as its time complexity does not 
+   vary with different types of input, unlike algorithms with variable performance like Quick Sort.
+5. Suitable for Limited Memory Environments: Since Heap Sort does not require additional memory beyond a 
+   constant amount, it is well-suited for environments with limited memory.
+
+Disadvantages of Heap Sort:
+1. Not Stable: Heap Sort is not a stable sorting algorithm, meaning that it does not necessarily maintain 
+   the relative order of equal elements. This can be a disadvantage in applications where the stability 
+   of the sorting process is important.
+2. Slower for Some Cases: Although Heap Sort has a time complexity of O(n log n), in practice it can be 
+   slower than other O(n log n) algorithms like Merge Sort due to higher constant factors and less 
+   cache-friendly memory access patterns.
+3. Complex Implementation: Implementing Heap Sort can be more complex compared to simpler sorting algorithms l
+   ike Bubble Sort or Insertion Sort. The process involves managing the heap property and performing 
+   operations like heapify, which can add to the complexity.
+4. Less Intuitive: The heap data structure and the process of maintaining the heap property during sorting 
+   can be less intuitive and harder to understand compared to simpler sorting algorithms.
+5. Not Adaptive: Heap Sort does not take advantage of existing order in the data. Unlike adaptive sorting 
+   algorithms that can perform better on nearly sorted data, Heap Sort performs consistently regardless 
+   of the initial ordering of the data.
+
+
+/////////////////////////////////////////
+
+
+Why is Heap Sort called 'Heap Sort'?
+
+Heap sort is called as such because it is a sorting algorithm that sorts a list based on the Heap 
+Data Structure.
+
+
+//////////////////////////////////////////
+
+
+Big O Notation of Time and Space Complexity for Heap Sort Algorithm:
+
+    Sorting Algorithms   |  Space Complexity  |   Time Complexity
+       Heap Sort	       |        O(1)	       |     O(n log n)
+
