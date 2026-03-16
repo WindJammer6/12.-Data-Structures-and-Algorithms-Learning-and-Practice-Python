@@ -7,11 +7,6 @@ Source: https://data-driven-world.github.io/2023/notes/heap-complexity/binary-he
 ///////////////////////////////////////
 
 
-Selection Sort is a sorting algorithm that sorts a list by repeatedly selecting the smallest (or largest) 
-element from the unsorted subarray of the initial unsorted List and moving it to the sorted subarray of the 
-initial unsorted List. 
-
-
 What is Heap Sort?
 
 Heap Sort is mainly an optimised variation of Selection Sort. 
