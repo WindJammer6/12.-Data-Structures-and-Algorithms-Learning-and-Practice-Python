@@ -48,7 +48,7 @@ Learning and Practices are both organised under each folder for their respective
       + [Tutorial 15.1 - Shell Sort (Sorting Algorithm) (improved Insertion Sort Algorithm variation)](#tutorial15.1)  
     + [Tutorial 16 - Merge Sort (Sorting Algorithm)](#tutorial16)  
     + [Tutorial 17 - Selection Sort (Sorting Algorithm)](#tutorial17) 
-      + [Tutorial 17.1 - Heap Sort (Sorting Algorithm)](#tutorial17.1) 
+      + [Tutorial 17.1 - Heap Sort (Sorting Algorithm) (improved Selection Sort Algorithm variation)](#tutorial17.1) 
     
 + [Thoughts after the learning journey](#thoughts)
 
@@ -353,6 +353,18 @@ Selection Sort is a sorting algorithm that sorts a list by repeatedly selecting 
 In this tutorial, we implemented the Selection Sort Algorithm iteratively.
 
 Source(s): https://www.youtube.com/watch?v=hhkLdjIimlw&list=PLeo1K3hjS3uu_n_a__MI_KktGTLYopZ12&index=19 (codebasics)
+
+<br>
+
+### Tutorial 17.1 - Heap Sort (Sorting Algorithm) (improved Insertion Sort Algorithm variation) <a name = "tutorial17.1"></a>
+*What is Heap Sort?*  
+Heap Sort is mainly an optimised variation of Selection Sort. 
+
+Selection Sort repeatedly finds the smallest element from the unsorted part of the list and places it into its correct sorted position. The problem is that finding that smallest element each time requires scanning the unsorted part linearly, which takes O(n) time for each pass. Heap Sort improves this by using the Heap Data Structure to find and remove the largest or smallest element more efficiently, in O(log n).
+
+In this tutorial, we implemented the Heap Sort Algorithm iteratively.
+
+Source(s): https://data-driven-world.github.io/2023/notes/heap-complexity/binary-heap (SUTD notes)
 
 <br>
 
