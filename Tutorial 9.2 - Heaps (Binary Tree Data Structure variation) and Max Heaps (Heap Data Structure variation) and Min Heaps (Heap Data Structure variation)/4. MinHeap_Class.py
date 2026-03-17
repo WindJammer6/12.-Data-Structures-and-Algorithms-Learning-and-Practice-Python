@@ -5,7 +5,6 @@ class HeapNode:
         self.right = None  # Right child
         self.parent = None # Parent node
 
-
 class MinHeap:
     def __init__(self):
         self.root = None
