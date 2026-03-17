@@ -3,18 +3,21 @@ def max_heapify(array, heap_size, index):
     right_child_index = 2 * index + 2
     largest_index = index
 
+        # Checking if there is a left child node, and if its larger than the parent node
     if (
         left_child_index < heap_size
         and array[left_child_index] > array[largest_index]
     ):
         largest_index = left_child_index
 
+        # Checking if there is a right child node, and if its larger than the parent node
     if (
         right_child_index < heap_size
         and array[right_child_index] > array[largest_index]
     ):
         largest_index = right_child_index
 
+        # If either of the child nodes is larger than the parent node
     if largest_index != index:
         array[index], array[largest_index] = array[largest_index], array[index]
         max_heapify(array, heap_size, largest_index)
