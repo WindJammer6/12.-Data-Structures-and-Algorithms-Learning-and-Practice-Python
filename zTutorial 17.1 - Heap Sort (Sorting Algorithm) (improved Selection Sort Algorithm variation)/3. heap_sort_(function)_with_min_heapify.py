@@ -3,18 +3,21 @@ def min_heapify(array, heap_size, index):
     right_child_index = 2 * index + 2
     smallest_index = index
 
+        # Checking if there is a left child node, and if its smaller than the parent node
     if (
         left_child_index < heap_size
         and array[left_child_index] < array[smallest_index]
     ):
         smallest_index = left_child_index
 
+        # Checking if there is a right child node, and if its smaller than the parent node
     if (
         right_child_index < heap_size
         and array[right_child_index] < array[smallest_index]
     ):
         smallest_index = right_child_index
 
+        # If either of the child nodes is smaller than the parent node
     if smallest_index != index:
         array[index], array[smallest_index] = array[smallest_index], array[index]
         min_heapify(array, heap_size, smallest_index)
