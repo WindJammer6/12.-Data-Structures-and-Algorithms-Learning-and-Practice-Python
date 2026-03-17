@@ -17,18 +17,21 @@ class MinHeap:
         right_child_index = 2 * index + 2
         smallest_index = index
 
+        # Checking if there is a left child node, and if its smaller than the parent node
         if (
             left_child_index < self.size
             and self.nodes[left_child_index].data < self.nodes[smallest_index].data
         ):
             smallest_index = left_child_index
 
+        # Checking if there is a right child node, and if its smaller than the parent node
         if (
             right_child_index < self.size
             and self.nodes[right_child_index].data < self.nodes[smallest_index].data
         ):
             smallest_index = right_child_index
 
+        # If either of the child nodes is smaller than the parent node
         if smallest_index != index:
             self.nodes[index].data, self.nodes[smallest_index].data = (
                 self.nodes[smallest_index].data,
