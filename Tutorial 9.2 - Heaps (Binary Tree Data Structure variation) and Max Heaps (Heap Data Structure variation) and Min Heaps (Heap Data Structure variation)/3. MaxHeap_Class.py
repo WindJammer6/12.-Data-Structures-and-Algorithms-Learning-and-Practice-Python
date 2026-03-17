@@ -16,18 +16,21 @@ class MaxHeap:
         right_child_index = 2 * index + 2
         largest_index = index
 
+        # Checking if there is a left child node, and if its larger than the parent node
         if (
             left_child_index < self.size
             and self.nodes[left_child_index].data > self.nodes[largest_index].data
         ):
             largest_index = left_child_index
 
+        # Checking if there is a right child node, and if its larger than the parent node
         if (
             right_child_index < self.size
             and self.nodes[right_child_index].data > self.nodes[largest_index].data
         ):
             largest_index = right_child_index
 
+        # If either of the child nodes is larger than the parent node
         if largest_index != index:
             self.nodes[index].data, self.nodes[largest_index].data = (
                 self.nodes[largest_index].data,
