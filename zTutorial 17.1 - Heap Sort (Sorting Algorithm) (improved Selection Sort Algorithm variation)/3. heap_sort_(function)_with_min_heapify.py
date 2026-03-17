@@ -26,12 +26,19 @@ def min_heapify(array, heap_size, index):
 def heap_sort_with_min_heapify(array):
     heap_size = len(array)
 
+    # Build min heap
     for index in range(heap_size // 2 - 1, -1, -1):
         min_heapify(array, heap_size, index)
 
+    # One by one extract an element from min heap
     for last_element_index in range(len(array) - 1, 0, -1):
+        # Move current root to end
         array[0], array[last_element_index] = array[last_element_index], array[0]
+
+        # Reduce heap
         heap_size -= 1
+
+        # Call min heapify on the reduced heap
         min_heapify(array, heap_size, 0)
 
 
